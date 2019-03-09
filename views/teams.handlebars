@@ -18,7 +18,7 @@
 
 <div id="add_super_team">
 <h3>Add a New Super Team</h3>
-<form id="add_character_form" action="/characters" method="post">
+<form id="add_character_form" action="/teams" method="post">
 	<label for="tname">Team Name:</label>
 	<input type="text" name="tname" size="50"><br/>
 	<label for="alignment">Alignment:</label>
@@ -27,24 +27,25 @@
 		<option>Neutral</option>
 		<options>Evil</options>
 	</select>
-	<input type="submit" value="Submit" id="add_super_team_submit" />
+	<input type="submit" value="Submit" id="add_super_team_submit" name="new_team" />
 </form>
 </div>
 
 <div id="add_character_super_team">
 	<h3>Add a Character to a Super Team</h3>
-	<form id = "add_character_super_team_form">
+	<form id = "add_character_super_team_form" action="/teams" method="post">
 		<label for="cid">Character:</label>
 		<select id="select_character_add_super_team" name="cid">
 			{{#each chars}}
-  				<option value="{{this.cid}}">{{this.fname}} {{this.lname}} - {{this.hname}}</option>
+  				<option value="{{this.id}}">{{this.fname}} {{this.lname}} - {{this.hname}}</option>
   			{{/each}}
 		</select>
+		<label>Super Team:</label>
 		<select id="select_super_team_add_super_team" name="id">
 			{{#each teams}}
   				<option value="{{this.id}}">{{this.tname}}</option>
   			{{/each}}
 		</select>
-		<input type="submit" value="Submit" id="add_character_weapon_submit" />
+		<input type="submit" value="Submit" id="add_character_weapon_submit" name="new_char_team" />
 	</form>	
 </div>

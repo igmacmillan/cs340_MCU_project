@@ -1,0 +1,23 @@
+<h3>Powers</h3>
+<div id="display_powers">
+<h3>Powers in the MCU</h3>
+<table>
+	<tr>
+		<th>Power Name</th>
+	</tr>
+	{{#each powers}}
+	<tr>
+			<td>{{this.ability}}</td>  	
+  	</tr>
+  	{{/each}}
+</table>
+
+
+<div id="add_power">
+<h3>Add a New Power</h3>
+<form id="add_weapon_form" action="/powers" method="post">
+	<label>Power Name:</label>
+	<input type="text" name="ability" size="50"><br/>
+	<input type="submit" value="Submit" id="add_power" name="new_power" />
+</form>
+</div>

@@ -15,9 +15,11 @@ module.exports = function(){
         });
     }
 
-// return list of current weapons by weapon name
+//  return weapons joined with Character_Weapnons. 
+// Need wid from Character_Weapons to too add new weapons to Characters. Otherwise both use id.
     function getWeaponList(res, mysql, context, complete){
-        mysql.pool.query("SELECT Weapons.id, wname FROM Weapons", function(error, results, fields){
+        mysql.pool.query("SELECT Weapons.id, Weapons.wname FROM Weapons", 
+        function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -30,7 +32,8 @@ module.exports = function(){
 
 // return list of current powers by power name
     function getPowersList(res, mysql, context, complete){
-        mysql.pool.query("SELECT Powers.id, ability FROM Powers", function(error, results, fields){
+        mysql.pool.query("SELECT Powers.id, Powers.ability FROM Powers",
+        function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -112,8 +115,21 @@ module.exports = function(){
   /* Adds a character, redirects to the chars page after adding */
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Characters (fname, lname, hname, race) VALUES (?,?,?,?)";
-        var inserts = [req.body.fname, req.body.lname, req.body.hname, req.body.race];
+        if(req.body['new_char']){  
+            var sql = "INSERT INTO Characters (fname, lname, hname, race) VALUES (?,?,?,?)";
+            var inserts = [req.body.fname, req.body.lname, req.body.hname, req.body.race];
+        }   
+        
+         if(req.body['new_char_weapon']){  
+            var sql = "INSERT INTO Character_Weapons (cid, wid) VALUES (?,?)";
+            var inserts = [req.body.id, req.body.wid];    
+        } 
+
+           if(req.body['new_char_power']){  
+            var sql = "INSERT INTO Character_Powers (cid, pid) VALUES (?,?)";
+            var inserts = [req.body.id, req.body.pid];    
+        } 
+
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
@@ -123,6 +139,7 @@ module.exports = function(){
                 res.redirect('/characters');
             }
         });
+           
     });
 
 //Update Character Info

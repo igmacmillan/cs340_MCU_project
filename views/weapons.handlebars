@@ -1,0 +1,42 @@
+<h3>Weapons</h3>
+<div id="display_weapons">
+<h3>Weapons in the MCU</h3>
+<table>
+	<tr>
+		<th>Weapon Name</th>
+	</tr>
+	{{#each weapons}}
+	<tr>
+			<td>{{this.wname}}</td>  	
+  	</tr>
+  	{{/each}}
+</table>
+
+
+<div id="add_weapon">
+<h3>Add a New Weapon</h3>
+<form id="add_weapon_form" action="/weapons" method="post">
+	<label for="tname">Weapon Name:</label>
+	<input type="text" name="wname" size="50"><br/>
+	<input type="submit" value="Submit" id="add_weapon_submit" name="new_weapon" />
+</form>
+</div>
+
+<div id="add_weapon_power">
+	<h3>Add a Power to a Weapon</h3>
+	<form id = "add_weapon_power_form" action="/weapons" method="post">
+		<label>Weapon:</label>
+		<select id="select_weapon_add_power" name="id">
+			{{#each weapons}}
+  				<option value="{{this.id}}">{{this.wname}}</option>
+  			{{/each}}
+		</select>
+		<label>Power:</label>
+		<select id="select_power_add_weapon" name="pid">
+			{{#each powers}}
+  				<option value="{{this.id}}">{{this.ability}}</option>
+  			{{/each}}
+		</select>
+		<input type="submit" value="Submit" id="add_character_weapon_submit" name="new_weapon_power" />
+	</form>	
+</div>

@@ -19,6 +19,8 @@ app.use('/static', express.static('public'));
 app.set('mysql', mysql);
 app.use('/characters', require('./Characters.js'));
 app.use('/teams', require('./SuperTeams.js'));
+app.use('/weapons', require('./Weapons.js'));
+app.use('/powers', require('./Powers.js'));
 app.use('/', express.static('public'));
 
 app.get('/',function(req,res){

@@ -10,7 +10,7 @@
 	<input type="text" name="hname" size="50"><br/>
 	<label for="race">Race:</label>
 	<input type="text" name="race" size="50"><br/>
-	<input type="submit" value="Submit" id="add_character_submit" />
+	<input type="submit" value="Submit" id="add_character_submit" name="new_char" />
 </form>
 </div>
 
@@ -39,11 +39,11 @@
 
 <div id="add_character_weapon">
 	<h3>Add a weapon to a character</h3>
-	<form id = "add_character_weapon_form">
-		<label for="cid">Character:</label>
-		<select id="select_character_add_weapon" name="cid">
+	<form id = "add_character_weapon_form" action="/characters" method="post">
+		<label>Character:</label>
+		<select id="select_character_add_weapon" name="id">
 			{{#each chars}}
-  				<option value="{{this.cid}}">{{this.fname}} {{this.lname}} - {{this.hname}}</option>
+  				<option value="{{this.id}}">{{this.fname}} {{this.lname}} - {{this.hname}}</option>
   			{{/each}}
 		</select>
 		<label for="wid">Weapon:</label>
@@ -52,14 +52,14 @@
   				<option value="{{this.id}}">{{this.wname}}</option>
   			{{/each}}
 		</select>
-		<input type="submit" value="Submit" id="add_character_weapon_submit" />
+		<input type="submit" value="Submit" id="add_character_weapon_submit" name="new_char_weapon" />
 	</form>	
 </div>
 <div id="add_character_power">
 	<h3>Add a power to a character</h3>
-	<form id="add_character_power_form">
-		<label for="cid">Character:</label>
-		<select id="select_character_add_power" name="cid">
+	<form id="add_character_power_form" action="/characters" method="post">
+		<label>Character:</label>
+		<select id="select_character_add_power" name="id">
 			<!---<option>Please select a character.</option>-->
 			{{#each chars}}
   				<option value = "{{this.id}}"> {{this.fname}} {{this.lname}} - {{this.hname}}</option>
@@ -70,6 +70,7 @@
   			{{#each powers}}
   				<option value="{{this.id}}">{{this.ability}}</option>
   			{{/each}}
-		</select>		<input type="submit" value="Submit" id="add_character_power_submit" />
+		</select>		
+		<input type="submit" value="Submit" id="add_character_power_submit" name="new_char_power" />
 	</form>	
 </div>
