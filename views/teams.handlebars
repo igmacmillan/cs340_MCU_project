@@ -1,0 +1,50 @@
+<h3>Super Teams</h3>
+<div id="display_characters">
+<h3>Super Teams in the MCU</h3>
+<table>
+	<tr>
+		<th>Super Team Name</th>
+		<th>Alignment</th>
+	</tr>
+	{{#each teams}}
+	<tr>
+		
+			<td>{{this.tname}}</td>
+			<td>{{this.alignment}}</td>	  	
+  	</tr>
+  	{{/each}}
+</table>
+
+
+<div id="add_super_team">
+<h3>Add a New Super Team</h3>
+<form id="add_character_form" action="/characters" method="post">
+	<label for="tname">Team Name:</label>
+	<input type="text" name="tname" size="50"><br/>
+	<label for="alignment">Alignment:</label>
+	<select id="select_alignment_add_super_team" name="alignment">
+		<option>Good</option>
+		<option>Neutral</option>
+		<options>Evil</options>
+	</select>
+	<input type="submit" value="Submit" id="add_super_team_submit" />
+</form>
+</div>
+
+<div id="add_character_super_team">
+	<h3>Add a Character to a Super Team</h3>
+	<form id = "add_character_super_team_form">
+		<label for="cid">Character:</label>
+		<select id="select_character_add_super_team" name="cid">
+			{{#each chars}}
+  				<option value="{{this.cid}}">{{this.fname}} {{this.lname}} - {{this.hname}}</option>
+  			{{/each}}
+		</select>
+		<select id="select_super_team_add_super_team" name="id">
+			{{#each teams}}
+  				<option value="{{this.id}}">{{this.tname}}</option>
+  			{{/each}}
+		</select>
+		<input type="submit" value="Submit" id="add_character_weapon_submit" />
+	</form>	
+</div>
