@@ -14,24 +14,11 @@ module.exports = function(){
             complete();
         });
     }
-
-/********Drop Boxes***********/
-//Character
-/*Fills in dropdown box for selecting a character*/
-    function getCharDropDown(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, hname FROM Characters", function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.powers  = results;
-            complete();
-        });
-    }
-//Power
-/*Fills in dropdown box for selecting a power*/
-    function getPowerDropDown(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, ability FROM Powers", function(error, results, fields){
+/*// display all weapons using a particular power
+ function getWeapons(res, mysql, context, complete){
+        mysql.pool.query("SELECT Weapons.wname FROM Weapons\
+            INNER JOIN Weapon_Powers ON Weapons.id = Weapons", 
+            function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -39,7 +26,13 @@ module.exports = function(){
             context.powers = results;
             complete();
         });
-    }
+    }*/
+
+
+
+/********Drop Boxes***********/
+//don't need any
+
 /*******Routing Actions********/
 //Display Powers Table
     /*Display all Powers & fills each dropdown box. Requires web based javascript to delete users with AJAX*/
@@ -49,23 +42,29 @@ module.exports = function(){
         //context.jsscripts = ["deleteweapon.js"];
         var mysql = req.app.get('mysql');
         getPowerList(res, mysql, context, complete);
-        getCharDropDown(res, mysql, context, complete);
-        getPowerDropDown(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 3){
+            if(callbackCount >= 1){
                 res.render('powers', context);
             }
 
         }
     });
-
-
-//add powers
-router.post('/', function(req, res){
-        var mysql = req.app.get('mysql'); 
-        var sql = "INSERT INTO Powers (ability) VALUES (?)";
-        var inserts = [req.body.ability];
+//Add Power
+  /* Adds a power then redirects to the powers page after adding */
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        if(req.body['new_power']){
+            var sql = "INSERT INTO Powers (ability) VALUES (?)";
+            var inserts = [req.body.ability];
+        }
+        if(req.body['find_weapons']){
+            var sql = "SELECT Weapons.wname FROM Weapons\
+            INNER JOIN Weapon_Powers ON Weapons.id = Weapon_Powers.wid\
+            INNER JOIN Powers ON Weapon_Powers.pid = Powers.id\
+            WHERE Powers.id = ?";
+            var inserts = [req.body.id];
+        }
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
@@ -75,11 +74,7 @@ router.post('/', function(req, res){
                 res.redirect('/powers');
             }
         });
-           
     });
-//add power to weapon --dropdown boxes
 
     return router;
 }();
-
-//Add character to super team -- dropdown boxes

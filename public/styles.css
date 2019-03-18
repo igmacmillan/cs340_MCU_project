@@ -1,0 +1,136 @@
+
+body{
+  color: #666666;
+  background-color: #f9f8f6;
+  font-family: Verdana, Times, serif;
+  margin: 10px;
+  text-align: center;
+}
+
+header{
+  margin: 10px 0px 10px 0px;
+  background-color: #000000;
+}
+
+footer{
+  color: #000000;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  padding: 7px 0px 0px 20px;
+  background-color: #aeaca8;
+  text-align: center;
+}
+
+nav{
+  clear: both;
+  color: #ffffff;
+  background-color: #aeaca8;
+  height: 30px;
+}
+nav ul {
+  margin: 0px;
+  padding: 5px 0px 5px 30px;}
+nav li {
+  display: inline;
+  margin-right: 40px;}
+nav li a{
+  color: #ea2539;}
+nav li a:hover, nav li a.current {
+  color: #000000;}
+
+.wrapper{
+  padding:20px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.form_div{
+  margin: auto;
+  justify-content: center;
+  align-items:center;
+  height: 450px;
+  border: 1px solid black;
+}
+
+form{
+  width: 300 px;
+  margin: 0 auto;
+}
+
+table{
+  text-align:center;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  
+}
+
+input[type=submit] {
+  background-color: #ea2539;
+  color: white;
+  padding: 5px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+ 
+}
+
+input[type=submit]:hover {
+    opacity:0.8;
+}
+
+input[type=text] select, textarea {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+button{
+  background-color: #ea2539;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+button:hover{
+  opacity:0.8;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.homediv{
+  position: relative;
+  min-height: 75vh;
+  text-align: center;
+}
+
+#content-wrap{
+  padding-bottom: 2.5rem; /*footer height*/
+  text-align: center;
+}
+.blockspace{
+  width: 100%;
+  display: table;
+}
+.block{
+  width: 25%;
+  display: table-cell;
+}
+
+#home{
+  white-space:normal;
+  text-align: center;
+}

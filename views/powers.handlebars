@@ -1,23 +1,78 @@
-<h3>Powers</h3>
-<div id="display_powers">
-<h3>Powers in the MCU</h3>
-<table>
-	<tr>
-		<th>Power Name</th>
-	</tr>
-	{{#each powers}}
-	<tr>
-			<td>{{this.ability}}</td>  	
-  	</tr>
-  	{{/each}}
-</table>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css" type="text/css"/>
+    <title>A Guide to the MCU</title>
+  </head>
+  <body>
+<!--Navigation Bar and Background-->
+      <div class="wrapper">
+        <header>
+            <img src="MCU_Rankings3.jpg"/>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/characters">Characters</a></li>
+              <li><a href="/teams">Super Teams </a></li>
+              <li><a href="/weapons" class="current">Weapons </a></li>
+              <li><a href="/powers"> Powers </a></li>
+            </ul>
+          </nav>
+        </header>
+      </div>
+
+	<h3>Powers</h3>
+
+	<div id="display_powers">
+	<h3>Powers in the MCU</h3>
+		<table>
+			<tr>
+				<th>Power Name</th>
+			</tr>
+			{{#each powers}}
+			<tr>
+					<td>{{this.ability}}</td>  	
+  			</tr>
+  			{{/each}}
+		</table>
 
 
-<div id="add_power">
-<h3>Add a New Power</h3>
-<form id="add_weapon_form" action="/powers" method="post">
-	<label>Power Name:</label>
-	<input type="text" name="ability" size="50"><br/>
-	<input type="submit" value="Submit" id="add_power" name="new_power" />
-</form>
-</div>
+		<div id="add_power">
+		<h3>Add a New Power</h3>
+
+		<form id="add_weapon_form" action="/powers" method="post">
+			<label>Power Name:</label>
+			<input type="text" name="ability" size="50"><br/>
+			<input type="submit" value="Submit" id="add_power" name="new_power" />
+		</form>
+		</div>
+	</div>
+
+    <div id="weapon_search">
+    <h3>Find All Weapons Using a Certain Power</h3>
+
+   <form id="find_weapon_form" action="/powers" method="post">
+      <label>Power:</label>
+      <select id="select_power_find_weapons" name="id">
+        {{#each powers}}
+            <option value = "{{this.id}}"> {{this.ability}}</option>
+          {{/each}}
+      </select>
+      <input type="submit" value="Submit" name="find_weapons" />
+    </form> 
+    <table>
+      <tr>
+        <th>Weapon Name</th>
+      </tr>
+      {{#each weapon}}
+      <tr>
+          <td>{{this.wname}}</td>   
+        </tr>
+        {{/each}}
+    </table>
+    </div>
+  </div>
+</body>
+</html>

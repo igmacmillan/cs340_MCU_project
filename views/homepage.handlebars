@@ -3,41 +3,86 @@
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+			<link rel="stylesheet" href="styles.css" type="text/css"/>
 			<title>A Guide to the MCU</title>
-						
-			<!-- CSS -->
 		</head>
 
 		<body>
-			<h1>A Guide to the Marvel Cinematic Universe</h1>
-			<h3 class="pages"><a href="/characters">Characters</a></h3>
-			<ul>
-				<li>display list of characters</li>
-				<li>add new characters</li>
-				<li>delete a character</li>
-				<li>update existing character information</li>
-				<li>add weapon to a character</li>
-				<li>add power to a character</li>
-			</ul>
-			<h3 class="pages"><a href="/teams">Super Teams</a></h3>
-			<ul>
-				<li>display all Super Teams</li>
-				<li>add characters to existing Super Teams</li>
-				<li>create new Super Teams</li>
-			</ul>
-			<h3 class="pages"><a href="/weapons">Weapons</a></h3>
-			<ul>
-				<li>search existing Weapons</li>
-				<li>add new Weapons(including its power)</li>
-				<li>add a power to a Weapon</li>
-			</ul>
-			<h3 class="pages"><a href="/powers">Powers</a></h3>
-			<ul>
-				<li>search existing Powers</li>
-				<li>add new Powers</li>
-			</ul>
+			<!--Navigation Bar and Background-->
+      		<div class="wrapper">
+       			<header>
+            		<img src="MCU_Rankings3.jpg"/>
+         		 <nav>
+            		<ul>
+             			<li><a href="/homepage" class="current">Home</a></li>
+             			<li><a href="/characters">Characters</a></li>
+              			<li><a href="/teams">Super Teams </a></li>
+              			<li><a href="/weapons">Weapons </a></li>
+              			<li><a href="/powers"> Powers </a></li>
+            		</ul>
+         		</nav>
+        		</header>
+      		</div>
 
+      		<div class="homediv">
+      			<div id="content-wrap">
+				<h1>A Guide to the Marvel Cinematic Universe</h1>
+
+				<p id="home"> 
+					This full-stack website is a joint project of Emily Dierks and Ian MacMillan.
+					The front end uses handlebars, server run on node.js, and database is mysql.
+					With this Guide you will be able to use database oriented CRUD functionality to 
+					explore the Marvel Universe.  Below are the functionalites available on each of
+					the pages.
+				</p>
+
+				<div class="blockspace">
+					<div style="display: table-row">
+					<div class="block">
+						<h3 class="pages"><a href="/characters">Characters</a></h3>
+						<img src="char.jpg" width="400" height="200">
+							<ul style="list-style-type: none">
+								<li>display list of characters</li>
+								<li>add new characters</li>
+								<li>delete a character</li>
+								<li>update existing character information</li>
+								<li>add existing weapon to a character</li>
+								<li>add existing power to a character</li>
+							</ul>
+					</div>
+					<div class="block">
+						<h3 class="pages"><a href="/teams">Super Teams</a></h3>
+						<img src="team_handshake.jpg" width="400" height="200">
+							<ul style="list-style-type: none">
+								<li>display all Super Teams</li>
+								<li>add existing characters to existing Super Teams</li>
+								<li>create new Super Teams</li>
+							</ul>
+					</div>
+					<div class="block">
+						<h3 class="pages"><a href="/weapons">Weapons</a></h3>
+						<img src="weapon.jpg" width="400" height="200">
+							<ul style="list-style-type: none">
+								<li>display all Weapons</li>
+								<li>add new Weapons</li>
+								<li>add an existing power to a Weapon</li>
+							</ul>
+					</div>
+					<div class="block">
+						<h3 class="pages"><a href="/powers">Powers</a></h3>
+						<img src="strange_powers.jpg" width="400" height="200">
+							<ul style="list-style-type: none">
+								<li>search existing Powers</li>
+								<li>add new Powers</li>
+							</ul>
+					</div>
+					</div>
+				</div>
+				</div>
+				<footer>
+					<p>Powered by Group 64</p>
+				</footer>
+			</div>
 		</body>
 
 	</html>
-
