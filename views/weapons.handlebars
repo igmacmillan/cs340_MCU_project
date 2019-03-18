@@ -1,42 +1,94 @@
-<h3>Weapons</h3>
-<div id="display_weapons">
-<h3>Weapons in the MCU</h3>
-<table>
-	<tr>
-		<th>Weapon Name</th>
-	</tr>
-	{{#each weapons}}
-	<tr>
-			<td>{{this.wname}}</td>  	
-  	</tr>
-  	{{/each}}
-</table>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css" type="text/css"/>
+    <title>A Guide to the MCU</title>
+  </head>
+  <body>
+<!--Navigation Bar and Background-->
+      <div class="wrapper">
+        <header>
+            <img src="MCU_Rankings3.jpg"/>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/characters">Characters</a></li>
+              <li><a href="/teams">Super Teams </a></li>
+              <li><a href="/weapons" class="current">Weapons </a></li>
+              <li><a href="/powers"> Powers </a></li>
+            </ul>
+          </nav>
+        </header>
+      </div>
 
+	<h3>Weapons</h3>
 
-<div id="add_weapon">
-<h3>Add a New Weapon</h3>
-<form id="add_weapon_form" action="/weapons" method="post">
-	<label for="tname">Weapon Name:</label>
-	<input type="text" name="wname" size="50"><br/>
-	<input type="submit" value="Submit" id="add_weapon_submit" name="new_weapon" />
-</form>
-</div>
-
-<div id="add_weapon_power">
-	<h3>Add a Power to a Weapon</h3>
-	<form id = "add_weapon_power_form" action="/weapons" method="post">
-		<label>Weapon:</label>
-		<select id="select_weapon_add_power" name="id">
-			{{#each weapons}}
-  				<option value="{{this.id}}">{{this.wname}}</option>
+	<div id="display_weapons">
+		<h3>Weapons in the MCU</h3>
+		<table>
+			<tr>
+				<th>Weapon Name</th>
+			</tr>
+				{{#each weapons}}
+			<tr>
+				<td>{{this.wname}}</td>  	
+  			</tr>
   			{{/each}}
-		</select>
-		<label>Power:</label>
-		<select id="select_power_add_weapon" name="pid">
-			{{#each powers}}
-  				<option value="{{this.id}}">{{this.ability}}</option>
-  			{{/each}}
-		</select>
-		<input type="submit" value="Submit" id="add_character_weapon_submit" name="new_weapon_power" />
-	</form>	
-</div>
+		</table>
+
+
+		<div id="add_weapon">
+
+			<h3>Add a New Weapon</h3>
+			<form id="add_weapon_form" action="/weapons" method="post">
+				<label for="tname">Weapon Name:</label>
+				<input type="text" name="wname" size="50"><br/>
+				<input type="submit" value="Submit" id="add_weapon_submit" name="new_weapon" />
+			</form>
+		</div>
+
+
+		<div id="display_weapon_power">
+      	<h3> Weapon Powers</h3>
+        <table>
+          <thead>
+            <th> Weapon </th>
+            <th> Power </th>
+          </thead>
+          <tbody>
+            {{#each weap_pow}}
+            <tr>
+              <td>{{this.wname}}</td>
+              <td>{{this.ability}}</td>
+              <td><button onclick="deleteWeaponPower({{this.wid}},{{this.pid}})">Delete</button></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+		</div>
+
+		<div id="add_weapon_power">
+		<h3>Add a Power to a Weapon</h3>
+		<form id = "add_weapon_power_form" action="/weapons" method="post">
+			<label>Weapon:</label>
+			<select id="select_weapon_add_power" name="id">
+				{{#each weapons}}
+  					<option value="{{this.id}}">{{this.wname}}</option>
+  				{{/each}}
+			</select>
+			<label>Power:</label>
+			<select id="select_power_add_weapon" name="pid">
+				{{#each powers}}
+  					<option value="{{this.id}}">{{this.ability}}</option>
+  				{{/each}}
+			</select>
+			<input type="submit" value="Submit" id="add_character_weapon_submit" name="new_weapon_power" />
+		</form>	
+		</div>
+
+
+	</div>
+</body>
+</html>
