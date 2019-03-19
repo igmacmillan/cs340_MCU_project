@@ -1,12 +1,35 @@
-<h1>Update MCU Character</h1>
-<form id = "update_character_form">
-	<label for="fname">First Name:</label>
-	<input type="text" name="fname" value = "{{chars.fname}}" size="50"><br/>
-	<label for="lname">Last Name:</label>
-	<input type="text" name="lname" value = "{{chars.lname}}" size="50"><br/>
-	<label for="hname">Hero Name:</label>
-	<input type="text" name="hname" value = "{{chars.hname}}" size="50"><br/>
-	<label for="race">Race:</label>
-	<input type="text" name="race" value = "{{chars.race}}" size="50"><br/>
-	<button onclick="updatechar({{chars.id}})">Update</button>
-</form>
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+			<link rel="stylesheet" href="styles.css" type="text/css"/>
+			<title>A Guide to the MCU</title>
+		</head>
+
+		<body>
+			<!--Navigation Bar and Background-->
+      		<div class="wrapper">
+       			<header>
+            		<img src="MCU_Rankings3.jpg"/>
+         		 <nav>
+         		</nav>
+        		</header>
+      		</div>
+
+      	<div class="update_form">
+		<h1>Update MCU Character</h1>
+		<form id = "update_character_form">
+			<label for="fname">First Name:</label>
+			<input type="text" name="fname" value = "{{chars.fname}}" size="50"><br/>
+			<label for="lname">Last Name:</label>
+			<input type="text" name="lname" value = "{{chars.lname}}" size="50"><br/>
+			<label for="hname">Hero Name:</label>
+			<input type="text" name="hname" value = "{{chars.hname}}" size="50"><br/>
+			<label for="race">Race:</label>
+			<input type="text" name="race" value = "{{chars.race}}" size="50"><br/>
+			<button type="update" onclick="updatechar({{chars.id}})">Update</button>
+		</form>
+		</div>
+	</body>
+	</html>

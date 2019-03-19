@@ -14,40 +14,41 @@ module.exports = function(){
             complete();
         });
     }
-
-//  return weapons joined with Character_Weapnons. 
-// Need wid from Character_Weapons to too add new weapons to Characters. Otherwise both use id.
-    function getWeaponList(res, mysql, context, complete){
-        mysql.pool.query("SELECT Weapons.id, Weapons.wname FROM Weapons", 
-        function(error, results, fields){
+// Display all Character to Weapons combinations
+ function getCharWeapList(res, mysql, context, complete){
+        mysql.pool.query("SELECT hname AS Hero, Character_Weapons.wid, wname AS Weapon FROM Characters \
+            INNER JOIN Character_Weapons ON Characters.id = Character_Weapons.cid \
+            INNER JOIN Weapons ON Weapons.id = Character_Weapons.wid \
+            ORDER BY hname", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            console.log(context.weapons);
-            context.weapons = results;
+            context.char_weap = results;
             complete();
         });
     }
 
-// return list of current powers by power name
-    function getPowersList(res, mysql, context, complete){
-        mysql.pool.query("SELECT Powers.id, Powers.ability FROM Powers",
-        function(error, results, fields){
+//display Character Powers
+    function getCharPowList(res, mysql, context, complete){
+        mysql.pool.query("SELECT hname AS Hero, ability AS Power, Character_Powers.pid\
+            FROM Characters\
+            INNER JOIN Character_Powers ON Characters.id = Character_Powers.cid\
+            INNER JOIN Powers ON Powers.id = Character_Powers.pid\
+            ORDER BY hname", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            console.log(context.weapons);
-            context.powers = results;
+            context.char_with_powers = results;
             complete();
         });
     }
+
 
 // search for character by hero name - text fill in box
     function getCharbyHeroName(req, res, mysql, context, complete){
       var query = "SELECT Characters.id, fname, lname, hname, race FROM Characters WHERE Characters.hname = ?";
-      console.log(req.params)
       var inserts = [req.params.hname];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
@@ -88,6 +89,31 @@ module.exports = function(){
         });
     }
 
+//Power
+/*Fills in dropdown box for selecting a power*/
+    function getPowerDropDown(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, ability FROM Powers", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.powers = results;
+            complete();
+        });
+    }
+//Weapon
+/*Fills in dropdown box for selecting a weapon*/
+    function getWeaponDropDown(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, wname FROM Weapons", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.weapons = results;
+            complete();
+        });
+    }
+
 /*******Routing Actions********/
 //Display Table
     /*Display all Characters & fills each dropdown box. Requires web based javascript to delete users with AJAX*/
@@ -97,38 +123,36 @@ module.exports = function(){
         context.jsscripts = ["deletechar.js"];
         var mysql = req.app.get('mysql');
         getCharacterList(res, mysql, context, complete);
-        getWeaponList(res, mysql, context, complete);
-        getPowersList(res, mysql, context, complete);
-        (res, mysql, context, complete);
+        getCharWeapList(res, mysql, context, complete);
+        getCharPowList(res, mysql, context, complete);
+        getPowerDropDown(res, mysql, context, complete);
+        getWeaponDropDown(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 3){
+            if(callbackCount >= 5){
                 res.render('characters', context);
             }
 
         }
     });
-//Search for Character by Hero Name
-//Empty right now
+
 
 //Add Character
   /* Adds a character, redirects to the chars page after adding */
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        if(req.body['new_char']){  
+        if(req.body['new_char']){
             var sql = "INSERT INTO Characters (fname, lname, hname, race) VALUES (?,?,?,?)";
             var inserts = [req.body.fname, req.body.lname, req.body.hname, req.body.race];
-        }   
-        
-         if(req.body['new_char_weapon']){  
+        }
+        if(req.body['new_char_weapon']){
             var sql = "INSERT INTO Character_Weapons (cid, wid) VALUES (?,?)";
-            var inserts = [req.body.id, req.body.wid];    
-        } 
-
-           if(req.body['new_char_power']){  
+            var inserts = [req.body.id, req.body.wid]; 
+        }
+        if(req.body['new_char_power']){
             var sql = "INSERT INTO Character_Powers (cid, pid) VALUES (?,?)";
-            var inserts = [req.body.id, req.body.pid];    
-        } 
+            var inserts = [req.body.id, req.body.pid];  
+        }
 
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -139,7 +163,6 @@ module.exports = function(){
                 res.redirect('/characters');
             }
         });
-           
     });
 
 //Update Character Info
@@ -165,8 +188,6 @@ module.exports = function(){
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        console.log(req.body)
-        console.log(req.params.id)
         var sql = "UPDATE Characters SET fname=?, lname=?, hname=?, race=? WHERE id=?";
         var inserts = [req.body.fname, req.body.lname, req.body.hname, req.body.race, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
